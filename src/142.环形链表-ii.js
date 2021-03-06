@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode.cn id=141 lang=javascript
+ * @lc app=leetcode.cn id=142 lang=javascript
  *
- * [141] 环形链表
+ * [142] 环形链表 II
  */
 
 // @lc code=start
@@ -15,17 +15,23 @@
 
 /**
  * @param {ListNode} head
- * @return {boolean}
+ * @return {ListNode}
  */
-var hasCycle = function (head) {
-  if (!head || !head.next) return false
+var detectCycle = function(head) {
+  if (!head || !head.next) return null
   // 双指针解法
   let p = head, q = head;
   do {
     p = p.next;
     q = q.next.next;
   } while (q && q.next && p !== q)
-  return p === q
+  if (p !== q) return null
+  p = head;
+  while(p !== q) {
+    p = p.next;
+    q = q.next;
+  }
+  return p
 };
 // @lc code=end
 
